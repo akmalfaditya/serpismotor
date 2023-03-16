@@ -1,0 +1,124 @@
+import 'package:flutter/material.dart';
+import 'package:serpismotor/utils/colors.dart';
+import 'package:serpismotor/utils/sizes.dart';
+
+class HeaderWithSearchBox extends StatelessWidget {
+  const HeaderWithSearchBox({Key? key, required this.size}) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: defaultPadding),
+      height: size.height * 0.2,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(
+              left: defaultPadding,
+              right: defaultPadding,
+              bottom: 30 + defaultPadding,
+            ),
+            height: size.height * 0.2 - 27,
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(36),
+                bottomRight: Radius.circular(36),
+              ),
+            ),
+            child: Row(
+
+              children: <Widget>[
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Spacer(),
+                    Container(
+
+                      child: Text(
+                        'TESS',
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                    ),
+
+                    Container(
+
+                      child: Text(
+                        'Selamat Datang bro',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ),
+                    Spacer(),
+                  ],
+                ),
+                Spacer(),
+                Container(
+                  child: CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage("assets/images/tunjungan.jpg"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              height: 54,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 10),
+                      blurRadius: 50,
+                      color: Colors.amber.withOpacity(0.23),
+                    ),
+                  ]),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {},
+                      decoration: InputDecoration(
+                        hintText: "Search",
+                        hintStyle: TextStyle(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.search),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
