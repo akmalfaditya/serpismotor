@@ -11,6 +11,25 @@ class HomeView extends StatelessWidget {
      appBar: buildAppbar(),
      backgroundColor: primaryColor,
      body: Body(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Stack(
+
+        fit: StackFit.passthrough,
+        children: [
+          Positioned(
+            child: FloatingActionButton(
+
+              onPressed: (){},
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                "Total: Rp. 10.000"
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
