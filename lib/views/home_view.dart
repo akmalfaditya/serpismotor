@@ -18,11 +18,7 @@ class HomeView extends StatelessWidget {
         children: [
           Positioned(
             child: FloatingActionButton(
-
               onPressed: (){},
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
               child: Text(
                 "Total: Rp. 10.000"
               ),
