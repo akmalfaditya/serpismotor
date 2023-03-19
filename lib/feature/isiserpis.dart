@@ -97,80 +97,83 @@ class _ProductListState extends State<ProductList> {
       });
     }
 
-
-
     return Expanded(
       child: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
           shrinkWrap: true,
           itemCount: products.length,
-
           itemBuilder: (context, index) {
             return Card(
-              color: Colors.blueGrey.shade200,
-              elevation: 5.0,
+              color: Colors.white,
+              elevation: 0.0,
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image(
-                      height: 80,
-                      width: 80,
-                      image: AssetImage(products[index].image.toString()),
-                    ),
-                    SizedBox(
-                      width: 130,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 5.0,
-                          ),
-                          RichText(
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            text: TextSpan(
-                                text: '',
-                                style: TextStyle(
-                                    color: Colors.blueGrey.shade800,
-                                    fontSize: 16.0),
-                                children: [
-                                  TextSpan(
-                                      text:
-                                          '${products[index].name.toString()}\n',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ]),
-                          ),
-
-                          RichText(
-                            maxLines: 1,
-                            text: TextSpan(
-                                text: 'Rp. ',
-                                style: TextStyle(
-                                    color: Colors.blueGrey.shade800,
-                                    fontSize: 16.0),
-                                children: [
-                                  TextSpan(
-                                      text:
-                                          '${products[index].price.toString()}\n',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ]),
-                          ),
-                        ],
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  height: 100,
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5.0),
+                        child: Image(
+                          image: AssetImage(products[index].image.toString()),
+                        ),
                       ),
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueGrey.shade900),
-                        onPressed: () {
-                          saveData(index);
-                        },
-                        child: const Text('+')),
-                  ],
+                      SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: 180,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 5.0,
+                            ),
+                            RichText(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              text: TextSpan(
+                                  text: '',
+                                  style: TextStyle(
+                                      color: Colors.blueGrey.shade800,
+                                      fontSize: 16.0),
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            '${products[index].name.toString()}\n',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                            RichText(
+                              maxLines: 1,
+                              text: TextSpan(
+                                  text: 'Rp. ',
+                                  style: TextStyle(
+                                      color: Colors.blueGrey.shade800,
+                                      fontSize: 16.0),
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            '${products[index].price.toString()}\n',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueGrey.shade900),
+                          onPressed: () {
+                            setState(() {
+                              saveData(index);
+                            });
+                          },
+                          child: const Text('+')),
+                    ],
+                  ),
                 ),
               ),
             );

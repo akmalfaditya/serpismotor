@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -38,15 +36,13 @@ class _CartScreenState extends State<CartScreen> {
         backgroundColor: backgroundColor,
         leading: GestureDetector(
           child: Icon(
-
             Icons.arrow_back_ios_new_rounded,
             color: Colors.black,
           ),
-          onTap: (){
+          onTap: () {
             Navigator.pop(context);
           },
         ),
-
       ),
       body: Column(
         children: [
@@ -56,10 +52,10 @@ class _CartScreenState extends State<CartScreen> {
                 if (provider.cart.isEmpty) {
                   return const Center(
                       child: Text(
-                        'Masih Kosong',
-                        style:
+                    'Masih Kosong',
+                    style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                      ));
+                  ));
                 } else {
                   return ListView.builder(
                       shrinkWrap: true,
@@ -78,13 +74,13 @@ class _CartScreenState extends State<CartScreen> {
                                   height: 80,
                                   width: 80,
                                   image:
-                                  AssetImage(provider.cart[index].image!),
+                                      AssetImage(provider.cart[index].image!),
                                 ),
                                 SizedBox(
                                   width: 130,
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(
                                         height: 5.0,
@@ -100,10 +96,10 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               TextSpan(
                                                   text:
-                                                  '${provider.cart[index].productName!}\n',
+                                                      '${provider.cart[index].productName!}\n',
                                                   style: const TextStyle(
                                                       fontWeight:
-                                                      FontWeight.bold)),
+                                                          FontWeight.bold)),
                                             ]),
                                       ),
                                       RichText(
@@ -116,10 +112,10 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               TextSpan(
                                                   text:
-                                                  '${provider.cart[index].unitTag!}\n',
+                                                      '${provider.cart[index].unitTag!}\n',
                                                   style: const TextStyle(
                                                       fontWeight:
-                                                      FontWeight.bold)),
+                                                          FontWeight.bold)),
                                             ]),
                                       ),
                                       RichText(
@@ -132,59 +128,16 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               TextSpan(
                                                   text:
-                                                  '${provider.cart[index].productPrice!}\n',
+                                                      '${provider.cart[index].productPrice!}\n',
                                                   style: const TextStyle(
                                                       fontWeight:
-                                                      FontWeight.bold)),
+                                                          FontWeight.bold)),
                                             ]),
                                       ),
                                     ],
                                   ),
                                 ),
-                                ValueListenableBuilder<int>(
-                                    valueListenable:
-                                    provider.cart[index].quantity!,
-                                    builder: (context, val, child) {
-                                      return PlusMinusButtons(
-                                        addQuantity: () {
-                                          cart.addQuantity(
-                                              provider.cart[index].id!);
-                                          dbHelper!
-                                              .updateQuantity(Cart(
-                                              id: index,
-                                              productId: index.toString(),
-                                              productName: provider
-                                                  .cart[index].productName,
-                                              initialPrice: provider
-                                                  .cart[index].initialPrice,
-                                              productPrice: provider
-                                                  .cart[index].productPrice,
-                                              quantity: ValueNotifier(
-                                                  provider.cart[index]
-                                                      .quantity!.value),
-                                              unitTag: provider
-                                                  .cart[index].unitTag,
-                                              image: provider
-                                                  .cart[index].image))
-                                              .then((value) {
-                                            setState(() {
-                                              cart.addTotalPrice(double.parse(
-                                                  provider
-                                                      .cart[index].productPrice
-                                                      .toString()));
-                                            });
-                                          });
-                                        },
-                                        deleteQuantity: () {
-                                          cart.deleteQuantity(
-                                              provider.cart[index].id!);
-                                          cart.removeTotalPrice(double.parse(
-                                              provider.cart[index].productPrice
-                                                  .toString()));
-                                        },
-                                        text: val.toString(),
-                                      );
-                                    }),
+
                                 IconButton(
                                     onPressed: () {
                                       dbHelper!.deleteCartItem(
@@ -216,7 +169,7 @@ class _CartScreenState extends State<CartScreen> {
               }
               return Container(
                 height: 50,
-                  color: Colors.amber,
+                color: Colors.amber,
                 child: ValueListenableBuilder<int?>(
                     valueListenable: totalPrice,
                     builder: (context, val, child) {
@@ -224,33 +177,32 @@ class _CartScreenState extends State<CartScreen> {
                           title: 'Estimasi Biaya Service ',
                           value: r'Rp. ' + (val?.toStringAsFixed(2) ?? '0'));
                     }),
-
               );
             },
           )
         ],
       ),
-     // bottomNavigationBar: InkWell(
-       // onTap: () {
-         // ScaffoldMessenger.of(context).showSnackBar(
-           // const SnackBar(
-             // content: Text('Payment Successful'),
-              //duration: Duration(seconds: 2),
-           // ),
-          //);
-        //},
-        //child: Container(
-          //color: Colors.yellow.shade600,
-          //alignment: Alignment.center,
-          //height: 50.0,
-          //child: const Text(
-            //'Proceed to Pay',
-            //style: TextStyle(
-              //fontSize: 18.0,
-              //fontWeight: FontWeight.bold,
-            //),
-          //),
-        //),
+      // bottomNavigationBar: InkWell(
+      // onTap: () {
+      // ScaffoldMessenger.of(context).showSnackBar(
+      // const SnackBar(
+      // content: Text('Payment Successful'),
+      //duration: Duration(seconds: 2),
+      // ),
+      //);
+      //},
+      //child: Container(
+      //color: Colors.yellow.shade600,
+      //alignment: Alignment.center,
+      //height: 50.0,
+      //child: const Text(
+      //'Proceed to Pay',
+      //style: TextStyle(
+      //fontSize: 18.0,
+      //fontWeight: FontWeight.bold,
+      //),
+      //),
+      //),
       //),
     );
   }
@@ -262,9 +214,9 @@ class PlusMinusButtons extends StatelessWidget {
   final String text;
   const PlusMinusButtons(
       {Key? key,
-        required this.addQuantity,
-        required this.deleteQuantity,
-        required this.text})
+      required this.addQuantity,
+      required this.deleteQuantity,
+      required this.text})
       : super(key: key);
 
   @override
