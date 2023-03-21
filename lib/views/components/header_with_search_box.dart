@@ -80,39 +80,39 @@ class HeaderWithSearchBox extends StatelessWidget {
             ),
           ),
 
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: defaultPadding),
-              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-              height: 54,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        hintText: "Search",
-                        hintStyle: TextStyle(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.search),
-                ],
-              ),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 0,
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     alignment: Alignment.center,
+          //     margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+          //     padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+          //     height: 54,
+          //     decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.circular(20),
+          //         ),
+          //     child: Row(
+          //       children: <Widget>[
+          //         Expanded(
+          //           child: TextField(
+          //             onChanged: (value) {},
+          //             decoration: InputDecoration(
+          //               hintText: "Search",
+          //               hintStyle: TextStyle(
+          //                 color: Colors.black.withOpacity(0.5),
+          //               ),
+          //               enabledBorder: InputBorder.none,
+          //               focusedBorder: InputBorder.none,
+          //             ),
+          //           ),
+          //         ),
+          //         Icon(Icons.search),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

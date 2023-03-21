@@ -35,7 +35,7 @@ class _HomeViewState extends State<HomeView> {
         appBar: buildAppbar(),
         backgroundColor: primaryColor,
         body: Body(),
-        
+
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Stack(
           children: [
@@ -118,6 +118,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
+
 
           ],
         ));

@@ -11,6 +11,7 @@ import 'package:serpismotor/views/home_view.dart';
 import 'package:serpismotor/utils/colors.dart';
 import 'package:serpismotor/utils/sizes.dart';
 
+
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
 
@@ -22,11 +23,25 @@ class _ProductListState extends State<ProductList> {
   DBHelper dbHelper = DBHelper();
 
   List<bool> tapped = [];
+  TextEditingController searchController = new TextEditingController();
+  String filter = "";
 
   @override
   void initState() {
+    searchController.addListener(() {
+      setState(() {
+        filter = searchController.text;
+      });
+    });
     super.initState();
     context.read<CartProvider>().getData();
+
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   List<Item> products = [
@@ -82,6 +97,10 @@ class _ProductListState extends State<ProductList> {
         image: 'assets/images/tunjungan.jpg'),
   ];
 
+
+
+
+
   //List<bool> clicked = List.generate(10, (index) => false, growable: true);
   @override
   Widget build(BuildContext context) {
@@ -111,6 +130,7 @@ class _ProductListState extends State<ProductList> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         color: backgroundColor,
         child: Column(
@@ -130,7 +150,7 @@ class _ProductListState extends State<ProductList> {
                   shrinkWrap: true,
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    return Card(
+                    return filter == ""?Card(
                       color: Colors.white,
                       elevation: 0.0,
                       margin: EdgeInsets.only(bottom: products.length - 1 == index ? 100 : 10),
@@ -215,7 +235,94 @@ class _ProductListState extends State<ProductList> {
                           ),
                         ),
                       ),
-                    );
+                    ): '${products[index].name}'.toLowerCase().contains(filter.toLowerCase())?
+                    Card(
+                      color: Colors.white,
+                      elevation: 0.0,
+                      margin: EdgeInsets.only(bottom: products.length - 1 == index ? 100 : 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Container(
+                          height: 100,
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5.0),
+                                child: Image(
+                                  image: AssetImage(
+                                      products[index].image.toString()),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 180,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    RichText(
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                      text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey.shade800,
+                                              fontSize: 16.0),
+                                          children: [
+                                            TextSpan(
+                                                text:
+                                                '${products[index].name.toString()}\n',
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                    FontWeight.bold)),
+                                          ]),
+                                    ),
+                                    RichText(
+                                      maxLines: 1,
+                                      text: TextSpan(
+                                          text: 'Rp. ',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey.shade800,
+                                              fontSize: 16.0),
+                                          children: [
+                                            TextSpan(
+                                                text:
+                                                '${products[index].price.toString()}\n',
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                    FontWeight.bold)),
+                                          ]),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      Colors.blueGrey.shade900),
+                                  onPressed: () {
+                                    setState(() {
+                                      saveData(index);
+
+                                      Navigator.pushReplacement(
+                                        context,
+                                        // DetailPage adalah halaman yang dituju
+                                        MaterialPageRoute(
+                                            builder: (context) => ProductList()),
+                                      );
+                                    });
+                                  },
+                                  child: const Text('+')),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ): new Container();
+
                   }),
             ),
 
@@ -304,7 +411,40 @@ class _ProductListState extends State<ProductList> {
                 ),
               ),
             ),
-
+            Positioned(
+              bottom: 575,
+              left: 0,
+              right: 0,
+              child: Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+                padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                height: 54,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        onChanged: (value) {},
+                        controller: searchController,
+                        decoration: InputDecoration(
+                          hintText: "Search",
+                          hintStyle: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    Icon(Icons.search),
+                  ],
+                ),
+              ),
+            ),
           ],
         )
     );
