@@ -31,9 +31,11 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: buildAppbar(),
         backgroundColor: primaryColor,
         body: Body(),
+        
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Stack(
           children: [
