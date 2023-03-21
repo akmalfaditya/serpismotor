@@ -37,7 +37,10 @@ class CartProvider with ChangeNotifier{
   }
 
   void addCounter(){
+
     _counter++;
+
+
     _setPrefsItems();
     notifyListeners();
   }
@@ -101,7 +104,7 @@ class CartProvider with ChangeNotifier{
 
   double getTotalPrice(){
     _getPrefsItems();
-    return _totalprice;
+    return _totalprice ;
   }
 
 }

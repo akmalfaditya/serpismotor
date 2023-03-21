@@ -6,6 +6,7 @@ import 'package:serpismotor/utils/colors.dart';
 import 'package:serpismotor/views/components/body.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:serpismotor/main.dart';
+import 'package:serpismotor/database/db_helper.dart';
 
 
 
@@ -17,6 +18,16 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  DBHelper? dbHelper = DBHelper();
+  List<bool> tapped = [];
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<CartProvider>().getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,16 +80,20 @@ class _HomeViewState extends State<HomeView> {
                             for (var element in value.cart){
                               totalPrice.value =  (element.productPrice! * element.quantity!.value) +
                                   (totalPrice.value ?? 0);
+
                             }
                             return Row(
                               children: [
                                 ValueListenableBuilder<int?>(
                                     valueListenable: totalPrice,
                                     builder: (context, val, child) {
-                                      return ReusableWidget(
-                                          title: '',
-                                          value: r'Rp. ' + (val?.toStringAsFixed(2) ?? '0'));
+                                      return Text(
+
+                                        "Rp. " + (val?.toStringAsFixed(2) ?? '0')
+                                      );
                                     }),
+
+
                               ],
                             );
                           },
@@ -87,7 +102,7 @@ class _HomeViewState extends State<HomeView> {
                           badgeContent: Consumer<CartProvider>(
                             builder: (context, value, child) {
                               return Text(
-                                value.getCounter().toString(),
+                                value.cart.length.toString(),
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -101,6 +116,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
+
           ],
         ));
   }

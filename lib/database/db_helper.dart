@@ -32,7 +32,7 @@ class DBHelper{
   //insert data ke tabel
   Future<Cart> insert(Cart cart) async{
     var dbClient = await database;
-    await dbClient!.insert('cart', cart.toMap());
+    await dbClient!.insert('cart', cart.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
     return cart;
 
   }

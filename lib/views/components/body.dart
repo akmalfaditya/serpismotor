@@ -29,6 +29,7 @@ class Body extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               HeaderWithSearchBox(size: size),
+              
               ProductList(),
 
 

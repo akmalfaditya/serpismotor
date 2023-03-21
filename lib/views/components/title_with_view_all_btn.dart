@@ -24,20 +24,20 @@ class TitleWithViewAllBtn extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              TextButton(
-                onPressed: press(),
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-
-                  ),
-                  backgroundColor: Colors.amber,
-                ),
-                child: Text(
-                  "View All",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-              ),
+              // TextButton(
+              //   onPressed: press(),
+              //   style: TextButton.styleFrom(
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(20),
+              //
+              //     ),
+              //     backgroundColor: Colors.amber,
+              //   ),
+              //   child: Text(
+              //     "View All",
+              //     style: TextStyle(color: Colors.white, fontSize: 12),
+              //   ),
+              // ),
 
             ],
           ),

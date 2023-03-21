@@ -6,6 +6,7 @@ import 'package:serpismotor/provider/cartprovider.dart';
 import 'package:serpismotor/database/db_helper.dart';
 import 'package:serpismotor/cart/cart_model.dart';
 import 'package:serpismotor/feature/totalscreen.dart';
+import 'package:serpismotor/views/home_view.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -168,8 +169,15 @@ class _ProductListState extends State<ProductList> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueGrey.shade900),
                           onPressed: () {
+
                             setState(() {
+
                               saveData(index);
+                              Navigator.pushReplacement(
+                                context,
+                                // DetailPage adalah halaman yang dituju
+                                MaterialPageRoute(builder: (context) => HomeView()),
+                              );
                             });
                           },
                           child: const Text('+')),

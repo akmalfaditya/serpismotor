@@ -145,6 +145,7 @@ class _CartScreenState extends State<CartScreen> {
                                       provider
                                           .removeItem(provider.cart[index].id!);
                                       provider.removeCounter();
+
                                     },
                                     icon: Icon(
                                       Icons.delete,
@@ -230,6 +231,8 @@ class PlusMinusButtons extends StatelessWidget {
     );
   }
 }
+
+
 
 class ReusableWidget extends StatelessWidget {
   final String title, value;
