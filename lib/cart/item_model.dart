@@ -1,21 +1,20 @@
-class Item{
+class Item {
   final String name;
-  final String unit;
+  final String service;
   final int price;
   final String image;
-  Item({
-    required this.name,
-    required this.unit,
-    required this.price,
-    required this.image
-});
+  Item(
+      {required this.name,
+      required this.service,
+      required this.price,
+      required this.image});
 
-  Map toJson(){
-    return{
-      'name':name,
-      'unit':unit,
-      'price':price,
-      'image':image,
+  Map toJson() {
+    return {
+      'name': name,
+      'service': service,
+      'price': price,
+      'image': image,
     };
   }
 }

@@ -11,6 +11,7 @@ import 'package:serpismotor/views/components/header_with_search_box.dart';
 import 'package:serpismotor/views/home_view.dart';
 import 'package:serpismotor/utils/colors.dart';
 import 'package:serpismotor/utils/sizes.dart';
+import 'package:serpismotor/utils/fonts.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -45,54 +46,84 @@ class _ProductListState extends State<ProductList> {
 
   List<Item> products = [
     Item(
-        name: 'Servis Rutin',
-        unit: 'pcs',
-        price: 65000,
+        name: 'Ganti Oli Mesin',
+        service: 'Oli',
+        price: 40000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Ganti oli mesin dan filter oli',
-        unit: 'pcs',
-        price: 250000,
+        name: 'Tune Up',
+        service: 'Maintenance',
+        price: 60000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Ganti filter udara',
-        unit: 'pcs',
-        price: 100000,
+        name: 'Starter Mati',
+        service: 'Ganti Dinamo Starter',
+        price: 40000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Ganti busi',
-        unit: 'pcs',
-        price: 25000,
+        name: 'Starter Mati',
+        service: 'Ganti ACCU',
+        price: 200000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Ganti kampas rem',
-        unit: 'pcs',
-        price: 125000,
+        name: 'Rem Tidak Berfungsi',
+        service: 'Cek Kabel Rem',
+        price: 60000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Ganti aki',
-        unit: 'pcs',
-        price: 250000,
+        name: 'Rem Tidak Berfungsi',
+        service: 'Ganti Kampas Rem',
+        price: 50000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Service rantai',
-        unit: 'pcs',
+        name: 'Lampu Mati',
+        service: 'Ganti Bohlam',
+        price: 60000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Lampu Mati',
+        service: 'Ganti Soket',
+        price: 50000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Lampu Mati',
+        service: 'Cek Kelistrikan',
+        price: 30000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Ganti Busi',
+        service: 'Busi',
+        price: 15000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Ganti Filler Udara',
+        service: 'Filler Udara',
+        price: 55000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Ganti Kampas Rem',
+        service: 'Kampas Rem',
+        price: 50000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Ganti Rantai dan Gear',
+        service: 'Rantai & Gear',
+        price: 120000,
+        image: 'assets/images/tunjungan.jpg'),
+    Item(
+        name: 'Ganti Ban',
+        service: 'Ban',
         price: 150000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Ganti ban dan balancing roda',
-        unit: 'pcs',
-        price: 500000,
+        name: 'Ganti Aki',
+        service: 'Aki',
+        price: 200000,
         image: 'assets/images/tunjungan.jpg'),
     Item(
-        name: 'Service rem',
-        unit: 'pcs',
-        price: 65000,
-        image: 'assets/images/tunjungan.jpg'),
-    Item(
-        name: 'Rem blong:',
-        unit: 'pcs',
-        price: 125000,
+        name: 'Service Karburator',
+        service: 'Karburator',
+        price: 85000,
         image: 'assets/images/tunjungan.jpg'),
   ];
 
@@ -111,7 +142,7 @@ class _ProductListState extends State<ProductList> {
           initialPrice: products[index].price,
           productPrice: products[index].price,
           quantity: ValueNotifier(1),
-          unitTag: products[index].unit,
+          service: products[index].service,
           image: products[index].image,
         ),
       )
@@ -189,10 +220,31 @@ class _ProductListState extends State<ProductList> {
                                                     TextSpan(
                                                         text:
                                                             '${products[index].name.toString()}\n',
-                                                        style: const TextStyle(
+                                                        style: header2),
+                                                  ]),
+                                            ),
+                                            RichText(
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              text: TextSpan(
+                                                  text: '',
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .blueGrey.shade800,
+                                                      fontSize: 16.0),
+                                                  children: [
+                                                    TextSpan(
+                                                        text:
+                                                            '${products[index].service.toString()}\n',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black45,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight
-                                                                    .bold)),
+                                                                    .w600)),
                                                   ]),
                                             ),
                                             RichText(
@@ -202,7 +254,10 @@ class _ProductListState extends State<ProductList> {
                                                 style: TextStyle(
                                                     color: Colors
                                                         .blueGrey.shade800,
-                                                    fontSize: 16.0),
+                                                    fontSize: 16.0,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                                 children: [
                                                   TextSpan(
                                                     text: NumberFormat.currency(
@@ -212,9 +267,11 @@ class _ProductListState extends State<ProductList> {
                                                     ).format(
                                                         products[index].price),
                                                     style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                                        color: Colors.black,
+                                                        fontSize: 16.0,
+                                                        fontFamily: 'Poppins',
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                   ),
                                                 ],
                                               ),
@@ -224,8 +281,7 @@ class _ProductListState extends State<ProductList> {
                                       ),
                                       ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.blueGrey.shade900),
+                                              backgroundColor: yellowColor),
                                           onPressed: () {
                                             setState(() {
                                               saveData(index);
@@ -239,7 +295,14 @@ class _ProductListState extends State<ProductList> {
                                               );
                                             });
                                           },
-                                          child: const Text('+')),
+                                          child: const Text(
+                                            'PILIH',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                letterSpacing: 1),
+                                          )),
                                     ],
                                   ),
                                 ),
@@ -296,10 +359,32 @@ class _ProductListState extends State<ProductList> {
                                                         TextSpan(
                                                             text:
                                                                 '${products[index].name.toString()}\n',
+                                                            style: header2),
+                                                      ]),
+                                                ),
+                                                RichText(
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  text: TextSpan(
+                                                      text: '',
+                                                      style: TextStyle(
+                                                          color: Colors.blueGrey
+                                                              .shade800,
+                                                          fontSize: 16.0),
+                                                      children: [
+                                                        TextSpan(
+                                                            text:
+                                                                '${products[index].service.toString()}\n',
                                                             style: const TextStyle(
+                                                                color: Colors
+                                                                    .black45,
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .bold)),
+                                                                        .w600)),
                                                       ]),
                                                 ),
                                                 RichText(
@@ -309,7 +394,10 @@ class _ProductListState extends State<ProductList> {
                                                     style: TextStyle(
                                                         color: Colors
                                                             .blueGrey.shade800,
-                                                        fontSize: 16.0),
+                                                        fontSize: 16.0,
+                                                        fontFamily: 'Poppins',
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                     children: [
                                                       TextSpan(
                                                         text: NumberFormat
@@ -319,10 +407,16 @@ class _ProductListState extends State<ProductList> {
                                                           decimalDigits: 0,
                                                         ).format(products[index]
                                                             .price),
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .blueGrey
+                                                                .shade800,
+                                                            fontSize: 16.0,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
                                                       ),
                                                     ],
                                                   ),
@@ -332,8 +426,7 @@ class _ProductListState extends State<ProductList> {
                                           ),
                                           ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.blueGrey.shade900),
+                                                  backgroundColor: yellowColor),
                                               onPressed: () {
                                                 setState(() {
                                                   saveData(index);
@@ -347,7 +440,14 @@ class _ProductListState extends State<ProductList> {
                                                   );
                                                 });
                                               },
-                                              child: const Text('+')),
+                                              child: const Text(
+                                                'PILIH',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 12,
+                                                    fontFamily: 'Poppins',
+                                                    letterSpacing: 1),
+                                              )),
                                         ],
                                       ),
                                     ),
@@ -401,11 +501,11 @@ class _ProductListState extends State<ProductList> {
                             Consumer<CartProvider>(
                               builder: (context, value, child) {
                                 return Text(
-                                  "${value.cart.length} Items",
+                                  "${value.cart.length} Services",
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 );
                               },

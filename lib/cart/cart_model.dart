@@ -7,7 +7,7 @@ class Cart {
   final int? initialPrice;
   final int? productPrice;
   final ValueNotifier<int>? quantity;
-  final String? unitTag;
+  final String? service;
   final String? image;
 
   Cart({
@@ -17,7 +17,7 @@ class Cart {
     required this.initialPrice,
     required this.productPrice,
     required this.quantity,
-    required this.unitTag,
+    required this.service,
     required this.image,
   });
 
@@ -28,7 +28,7 @@ class Cart {
         initialPrice = data['initialPrice'],
         productPrice = data['productPrice'],
         quantity = ValueNotifier(data['quantity']),
-        unitTag = data['unitTag'],
+        service = data['service'],
         image = data['image'];
 
   Map<String, dynamic> toMap() {
@@ -39,7 +39,7 @@ class Cart {
       'initialPrice': initialPrice,
       'productPrice': productPrice,
       'quantity': quantity?.value,
-      'unitTag': unitTag,
+      'service': service,
       'image': image,
     };
   }

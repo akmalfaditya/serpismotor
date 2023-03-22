@@ -112,7 +112,7 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               TextSpan(
                                                   text:
-                                                      '${provider.cart[index].unitTag!}\n',
+                                                      '${provider.cart[index].service!}\n',
                                                   style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold)),
@@ -137,7 +137,6 @@ class _CartScreenState extends State<CartScreen> {
                                     ],
                                   ),
                                 ),
-
                                 IconButton(
                                     onPressed: () {
                                       dbHelper!.deleteCartItem(
@@ -145,7 +144,6 @@ class _CartScreenState extends State<CartScreen> {
                                       provider
                                           .removeItem(provider.cart[index].id!);
                                       provider.removeCounter();
-
                                     },
                                     icon: Icon(
                                       Icons.delete,
@@ -231,8 +229,6 @@ class PlusMinusButtons extends StatelessWidget {
     );
   }
 }
-
-
 
 class ReusableWidget extends StatelessWidget {
   final String title, value;
