@@ -14,7 +14,6 @@ class HeaderWithSearchBox extends StatelessWidget {
       height: size.height * 0.20,
       child: Stack(
         children: <Widget>[
-
           Container(
             padding: EdgeInsets.only(
               left: defaultPadding,
@@ -30,36 +29,33 @@ class HeaderWithSearchBox extends StatelessWidget {
               ),
             ),
             child: Row(
-
               children: <Widget>[
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Spacer(),
                     Container(
-
                       child: Text(
-                        'TESS',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                    ),
-
-                    Container(
-
-                      child: Text(
-                        'Selamat Datang bro',
+                        'Halo Akmal',
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall
                             ?.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        'Nice to meet you again!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(
+                                color: Colors.black45,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16),
                       ),
                     ),
                     Spacer(),
@@ -72,7 +68,8 @@ class HeaderWithSearchBox extends StatelessWidget {
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage("assets/images/tunjungan.jpg"),
+                      backgroundImage:
+                          AssetImage("assets/images/tunjungan.jpg"),
                     ),
                   ),
                 ),

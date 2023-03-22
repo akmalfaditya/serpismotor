@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:serpismotor/utils/colors.dart';
@@ -31,20 +29,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider(
       create: (context) => CartProvider(),
       child: MaterialApp(
         title: 'Splash',
-
         theme: ThemeData(
           scaffoldBackgroundColor: backgroundColor,
           primaryColor: backgroundColor,
-          textTheme: Theme.of(context).textTheme.apply(
-            bodyColor: textColor
-          ),
+          textTheme: Theme.of(context)
+              .textTheme
+              .apply(bodyColor: textColor, fontFamily: 'Poppins'),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-
         ),
         home: MyHomePage(),
         debugShowCheckedModeBanner: false,
@@ -62,16 +57,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    Timer(Duration(seconds: 3),
-        ()=>Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => ProductList())
-        )
-    );
+    Timer(
+        Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ProductList())));
   }
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       child: FlutterLogo(
@@ -79,8 +74,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }
-
-
-

@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:serpismotor/cart/item_model.dart';
 import 'package:serpismotor/provider/cartprovider.dart';
@@ -197,20 +198,26 @@ class _ProductListState extends State<ProductList> {
                                             RichText(
                                               maxLines: 1,
                                               text: TextSpan(
-                                                  text: 'Rp. ',
-                                                  style: TextStyle(
-                                                      color: Colors
-                                                          .blueGrey.shade800,
-                                                      fontSize: 16.0),
-                                                  children: [
-                                                    TextSpan(
-                                                        text:
-                                                            '${products[index].price.toString()}\n',
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                  ]),
+                                                text: 'Rp. ',
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .blueGrey.shade800,
+                                                    fontSize: 16.0),
+                                                children: [
+                                                  TextSpan(
+                                                    text: NumberFormat.currency(
+                                                      locale: 'id',
+                                                      symbol: '',
+                                                      decimalDigits: 0,
+                                                    ).format(
+                                                        products[index].price),
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -298,20 +305,27 @@ class _ProductListState extends State<ProductList> {
                                                 RichText(
                                                   maxLines: 1,
                                                   text: TextSpan(
-                                                      text: 'Rp. ',
-                                                      style: TextStyle(
-                                                          color: Colors.blueGrey
-                                                              .shade800,
-                                                          fontSize: 16.0),
-                                                      children: [
-                                                        TextSpan(
-                                                            text:
-                                                                '${products[index].price.toString()}\n',
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ]),
+                                                    text: 'Rp. ',
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .blueGrey.shade800,
+                                                        fontSize: 16.0),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: NumberFormat
+                                                            .currency(
+                                                          locale: 'id',
+                                                          symbol: '',
+                                                          decimalDigits: 0,
+                                                        ).format(products[index]
+                                                            .price),
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -365,7 +379,7 @@ class _ProductListState extends State<ProductList> {
                 child: Container(
                   height: 70, // mengatur tinggi container
                   decoration: BoxDecoration(
-                    color: Color(0xffFFC646),
+                    gradient: gradientColor,
                     borderRadius: BorderRadius.circular(100),
                     boxShadow: [
                       BoxShadow(
@@ -412,17 +426,16 @@ class _ProductListState extends State<ProductList> {
                             child: Consumer<CartProvider>(
                               builder:
                                   (BuildContext context, value, Widget? child) {
-                                final ValueNotifier<int?> totalPrice =
-                                    ValueNotifier(null);
+                                final NumberFormat currencyFormat =
+                                    NumberFormat.currency(
+                                        locale: 'id_ID', symbol: 'Rp. ');
+                                int totalPrice = 0;
                                 for (var element in value.cart) {
-                                  totalPrice.value = (element.productPrice! *
-                                          element.quantity!.value) +
-                                      (totalPrice.value ?? 0);
+                                  totalPrice += (element.productPrice! *
+                                      element.quantity!.value);
                                 }
                                 return Text(
-                                  "Rp. " +
-                                      (totalPrice.value?.toStringAsFixed(2) ??
-                                          '0'),
+                                  currencyFormat.format(totalPrice),
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,
