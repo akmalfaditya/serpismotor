@@ -11,7 +11,6 @@ import 'package:serpismotor/views/home_view.dart';
 import 'package:serpismotor/utils/colors.dart';
 import 'package:serpismotor/utils/sizes.dart';
 
-
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
 
@@ -35,7 +34,6 @@ class _ProductListState extends State<ProductList> {
     });
     super.initState();
     context.read<CartProvider>().getData();
-
   }
 
   @override
@@ -97,10 +95,6 @@ class _ProductListState extends State<ProductList> {
         image: 'assets/images/tunjungan.jpg'),
   ];
 
-
-
-
-
   //List<bool> clicked = List.generate(10, (index) => false, growable: true);
   @override
   Widget build(BuildContext context) {
@@ -130,205 +124,227 @@ class _ProductListState extends State<ProductList> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        color: backgroundColor,
-        child: Column(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          color: backgroundColor,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 50,
+              ),
+              HeaderWithSearchBox(size: size),
+              Expanded(
+                child: ListView.builder(
+                    physics: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 8.0),
+                    shrinkWrap: true,
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return filter == ""
+                          ? Card(
+                              color: Colors.white,
+                              elevation: 0.0,
+                              margin: EdgeInsets.only(
+                                  bottom:
+                                      products.length - 1 == index ? 100 : 10),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: Container(
+                                  height: 100,
+                                  child: Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        child: Image(
+                                          image: AssetImage(
+                                              products[index].image.toString()),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      SizedBox(
+                                        width: 180,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            RichText(
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              text: TextSpan(
+                                                  text: '',
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .blueGrey.shade800,
+                                                      fontSize: 16.0),
+                                                  children: [
+                                                    TextSpan(
+                                                        text:
+                                                            '${products[index].name.toString()}\n',
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ]),
+                                            ),
+                                            RichText(
+                                              maxLines: 1,
+                                              text: TextSpan(
+                                                  text: 'Rp. ',
+                                                  style: TextStyle(
+                                                      color: Colors
+                                                          .blueGrey.shade800,
+                                                      fontSize: 16.0),
+                                                  children: [
+                                                    TextSpan(
+                                                        text:
+                                                            '${products[index].price.toString()}\n',
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ]),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  Colors.blueGrey.shade900),
+                                          onPressed: () {
+                                            setState(() {
+                                              saveData(index);
 
-          children: <Widget>[
-            SizedBox(
-              height: 50,
-            ),
-            HeaderWithSearchBox(size: size),
-            Expanded(
-
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 8.0),
-
-                  shrinkWrap: true,
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return filter == ""?Card(
-                      color: Colors.white,
-                      elevation: 0.0,
-                      margin: EdgeInsets.only(bottom: products.length - 1 == index ? 100 : 10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Container(
-                          height: 100,
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5.0),
-                                child: Image(
-                                  image: AssetImage(
-                                      products[index].image.toString()),
+                                              Navigator.pushReplacement(
+                                                context,
+                                                // DetailPage adalah halaman yang dituju
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProductList()),
+                                              );
+                                            });
+                                          },
+                                          child: const Text('+')),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              SizedBox(
-                                width: 180,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      text: TextSpan(
-                                          text: '',
-                                          style: TextStyle(
-                                              color: Colors.blueGrey.shade800,
-                                              fontSize: 16.0),
-                                          children: [
-                                            TextSpan(
-                                                text:
-                                                    '${products[index].name.toString()}\n',
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ]),
-                                    ),
-                                    RichText(
-                                      maxLines: 1,
-                                      text: TextSpan(
-                                          text: 'Rp. ',
-                                          style: TextStyle(
-                                              color: Colors.blueGrey.shade800,
-                                              fontSize: 16.0),
-                                          children: [
-                                            TextSpan(
-                                                text:
-                                                    '${products[index].price.toString()}\n',
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ]),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Colors.blueGrey.shade900),
-                                  onPressed: () {
-                                    setState(() {
-                                      saveData(index);
+                            )
+                          : '${products[index].name}'
+                                  .toLowerCase()
+                                  .contains(filter.toLowerCase())
+                              ? Card(
+                                  color: Colors.white,
+                                  elevation: 0.0,
+                                  margin: EdgeInsets.only(
+                                      bottom: products.length - 1 == index
+                                          ? 100
+                                          : 10),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: Container(
+                                      height: 100,
+                                      child: Row(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            child: Image(
+                                              image: AssetImage(products[index]
+                                                  .image
+                                                  .toString()),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          SizedBox(
+                                            width: 180,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                RichText(
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  text: TextSpan(
+                                                      text: '',
+                                                      style: TextStyle(
+                                                          color: Colors.blueGrey
+                                                              .shade800,
+                                                          fontSize: 16.0),
+                                                      children: [
+                                                        TextSpan(
+                                                            text:
+                                                                '${products[index].name.toString()}\n',
+                                                            style: const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ]),
+                                                ),
+                                                RichText(
+                                                  maxLines: 1,
+                                                  text: TextSpan(
+                                                      text: 'Rp. ',
+                                                      style: TextStyle(
+                                                          color: Colors.blueGrey
+                                                              .shade800,
+                                                          fontSize: 16.0),
+                                                      children: [
+                                                        TextSpan(
+                                                            text:
+                                                                '${products[index].price.toString()}\n',
+                                                            style: const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ]),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Colors.blueGrey.shade900),
+                                              onPressed: () {
+                                                setState(() {
+                                                  saveData(index);
 
-                                      Navigator.pushReplacement(
-                                        context,
-                                        // DetailPage adalah halaman yang dituju
-                                        MaterialPageRoute(
-                                            builder: (context) => ProductList()),
-                                      );
-                                    });
-                                  },
-                                  child: const Text('+')),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ): '${products[index].name}'.toLowerCase().contains(filter.toLowerCase())?
-                    Card(
-                      color: Colors.white,
-                      elevation: 0.0,
-                      margin: EdgeInsets.only(bottom: products.length - 1 == index ? 100 : 10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Container(
-                          height: 100,
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5.0),
-                                child: Image(
-                                  image: AssetImage(
-                                      products[index].image.toString()),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              SizedBox(
-                                width: 180,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 5.0,
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    // DetailPage adalah halaman yang dituju
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductList()),
+                                                  );
+                                                });
+                                              },
+                                              child: const Text('+')),
+                                        ],
+                                      ),
                                     ),
-                                    RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      text: TextSpan(
-                                          text: '',
-                                          style: TextStyle(
-                                              color: Colors.blueGrey.shade800,
-                                              fontSize: 16.0),
-                                          children: [
-                                            TextSpan(
-                                                text:
-                                                '${products[index].name.toString()}\n',
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.bold)),
-                                          ]),
-                                    ),
-                                    RichText(
-                                      maxLines: 1,
-                                      text: TextSpan(
-                                          text: 'Rp. ',
-                                          style: TextStyle(
-                                              color: Colors.blueGrey.shade800,
-                                              fontSize: 16.0),
-                                          children: [
-                                            TextSpan(
-                                                text:
-                                                '${products[index].price.toString()}\n',
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.bold)),
-                                          ]),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                      Colors.blueGrey.shade900),
-                                  onPressed: () {
-                                    setState(() {
-                                      saveData(index);
-
-                                      Navigator.pushReplacement(
-                                        context,
-                                        // DetailPage adalah halaman yang dituju
-                                        MaterialPageRoute(
-                                            builder: (context) => ProductList()),
-                                      );
-                                    });
-                                  },
-                                  child: const Text('+')),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ): new Container();
-
-                  }),
-            ),
-
-          ],
+                                  ),
+                                )
+                              : new Container();
+                    }),
+              ),
+            ],
+          ),
         ),
-      ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Stack(
           children: [
@@ -365,44 +381,56 @@ class _ProductListState extends State<ProductList> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Total Biaya",
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Consumer<CartProvider>(
+                              builder: (context, value, child) {
+                                return Text(
+                                  "${value.cart.length} Items",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              "Total Biaya",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
                         ),
-                        Consumer<CartProvider>(
-                          builder: (BuildContext context, value, Widget? child){
-                            final ValueNotifier<int?> totalPrice = ValueNotifier(null);
-                            for (var element in value.cart){
-                              totalPrice.value =  (element.productPrice! * element.quantity!.value) +
-                                  (totalPrice.value ?? 0);
-
-                            }
-                            return Row(
-                              children: [
-                                ValueListenableBuilder<int?>(
-                                    valueListenable: totalPrice,
-                                    builder: (context, val, child) {
-                                      return Text(
-
-                                          "Rp. " + (val?.toStringAsFixed(2) ?? '0')
-                                      );
-                                    }),
-
-
-                              ],
-                            );
-                          },
-                        ),
-                        badges.Badge(
-                          badgeContent: Consumer<CartProvider>(
-                            builder: (context, value, child) {
-                              return Text(
-                                value.cart.length.toString(),
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              );
-                            },
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Consumer<CartProvider>(
+                              builder:
+                                  (BuildContext context, value, Widget? child) {
+                                final ValueNotifier<int?> totalPrice =
+                                    ValueNotifier(null);
+                                for (var element in value.cart) {
+                                  totalPrice.value = (element.productPrice! *
+                                          element.quantity!.value) +
+                                      (totalPrice.value ?? 0);
+                                }
+                                return Text(
+                                  "Rp. " +
+                                      (totalPrice.value?.toStringAsFixed(2) ??
+                                          '0'),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -412,17 +440,17 @@ class _ProductListState extends State<ProductList> {
               ),
             ),
             Positioned(
-              bottom: 575,
+              top: 180,
               left: 0,
               right: 0,
               child: Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: defaultPadding),
                 padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                height: 54,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(50),
                 ),
                 child: Row(
                   children: <Widget>[
@@ -431,7 +459,7 @@ class _ProductListState extends State<ProductList> {
                         onChanged: (value) {},
                         controller: searchController,
                         decoration: InputDecoration(
-                          hintText: "Search",
+                          hintText: "Cari kebutuhan motormu",
                           hintStyle: TextStyle(
                             color: Colors.black.withOpacity(0.5),
                           ),
@@ -440,13 +468,28 @@ class _ProductListState extends State<ProductList> {
                         ),
                       ),
                     ),
-                    Icon(Icons.search),
+                    Positioned(
+                        right: 1,
+                        child: ClipOval(
+                          child: Material(
+                            color: yellowColor,
+                            child: InkWell(
+                              child: const Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Icon(
+                                  Icons.search,
+                                  size: 24,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ))
                   ],
                 ),
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }
