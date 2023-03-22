@@ -504,7 +504,7 @@ class _ProductListState extends State<ProductList> {
                                   "${value.cart.length} Services",
                                   style: const TextStyle(
                                     color: Colors.black,
-                                    fontSize: 16,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 );
@@ -515,7 +515,7 @@ class _ProductListState extends State<ProductList> {
                               "Total Biaya",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: 12,
                               ),
                             ),
                           ],
