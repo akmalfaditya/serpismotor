@@ -170,7 +170,7 @@ class _ProductListState extends State<ProductList> {
                     physics: BouncingScrollPhysics(
                         parent: AlwaysScrollableScrollPhysics()),
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 8.0),
+                        vertical: 10.0, horizontal: 25.0),
                     shrinkWrap: true,
                     itemCount: products.length,
                     itemBuilder: (context, index) {
@@ -184,13 +184,18 @@ class _ProductListState extends State<ProductList> {
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
                                 child: Container(
-                                  height: 100,
+                                  height: 120,
                                   child: Row(
                                     children: [
                                       ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5.0),
+                                          bottomLeft: Radius.circular(5.0),
+                                        ),
                                         child: Image(
+                                          height: 120,
+                                          width: 150,
+                                          fit: BoxFit.cover,
                                           image: AssetImage(
                                               products[index].image.toString()),
                                         ),
@@ -198,8 +203,7 @@ class _ProductListState extends State<ProductList> {
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      SizedBox(
-                                        width: 180,
+                                      Expanded(
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -280,29 +284,31 @@ class _ProductListState extends State<ProductList> {
                                         ),
                                       ),
                                       ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: yellowColor),
-                                          onPressed: () {
-                                            setState(() {
-                                              saveData(index);
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: yellowColor,
+                                            fixedSize: Size(60, 25)),
+                                        onPressed: () {
+                                          setState(() {
+                                            saveData(index);
 
-                                              Navigator.pushReplacement(
-                                                context,
-                                                // DetailPage adalah halaman yang dituju
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductList()),
-                                              );
-                                            });
-                                          },
-                                          child: const Text(
-                                            'PILIH',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
-                                                fontFamily: 'Poppins',
-                                                letterSpacing: 1),
-                                          )),
+                                            Navigator.pushReplacement(
+                                              context,
+                                              // DetailPage adalah halaman yang dituju
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProductList()),
+                                            );
+                                          });
+                                        },
+                                        child: const Text(
+                                          'PILIH',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              fontFamily: 'Poppins',
+                                              letterSpacing: 1),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -321,13 +327,19 @@ class _ProductListState extends State<ProductList> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(0),
                                     child: Container(
-                                      height: 100,
+                                      height: 120,
+                                      width: 150,
                                       child: Row(
                                         children: [
                                           ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(5.0),
+                                              bottomLeft: Radius.circular(5.0),
+                                            ),
                                             child: Image(
+                                              height: 120,
+                                              width: 120,
+                                              fit: BoxFit.cover,
                                               image: AssetImage(products[index]
                                                   .image
                                                   .toString()),
@@ -336,8 +348,7 @@ class _ProductListState extends State<ProductList> {
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          SizedBox(
-                                            width: 180,
+                                          Expanded(
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -426,7 +437,8 @@ class _ProductListState extends State<ProductList> {
                                           ),
                                           ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  backgroundColor: yellowColor),
+                                                  backgroundColor: yellowColor,
+                                                  fixedSize: Size(60, 25)),
                                               onPressed: () {
                                                 setState(() {
                                                   saveData(index);
