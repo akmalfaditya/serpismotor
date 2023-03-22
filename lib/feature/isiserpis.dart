@@ -169,18 +169,18 @@ class _ProductListState extends State<ProductList> {
                 child: ListView.builder(
                     physics: BouncingScrollPhysics(
                         parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 25.0),
+                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
                     shrinkWrap: true,
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       return filter == ""
                           ? Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)
+                              ),
                               color: Colors.white,
                               elevation: 0.0,
-                              margin: EdgeInsets.only(
-                                  bottom:
-                                      products.length - 1 == index ? 100 : 10),
+                              margin: EdgeInsets.fromLTRB(0,10,0,products.length - 1 == index ? 100 : 10),
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
                                 child: Container(
@@ -189,8 +189,8 @@ class _ProductListState extends State<ProductList> {
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5.0),
-                                          bottomLeft: Radius.circular(5.0),
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0),
                                         ),
                                         child: Image(
                                           height: 120,
@@ -280,35 +280,52 @@ class _ProductListState extends State<ProductList> {
                                                 ],
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 105,
+                                                ),
+                                                SizedBox(
+                                                  height: 30,
+                                                  width: 75,
+                                                  child: ElevatedButton(
+                                                    style: ElevatedButton.styleFrom(
+                                                        backgroundColor: yellowColor,
+                                                        fixedSize: Size(70, 25)),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        saveData(index);
+
+                                                        Navigator.pushReplacement(
+                                                          context,
+                                                          // DetailPage adalah halaman yang dituju
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ProductList()),
+                                                        );
+                                                      });
+                                                    },
+                                                    child: const Text(
+                                                      'PILIH',
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight.w600,
+                                                          fontSize: 13,
+                                                          fontFamily: 'Poppins',
+                                                          letterSpacing: 1),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+
+                                            ),
+
                                           ],
                                         ),
                                       ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: yellowColor,
-                                            fixedSize: Size(60, 25)),
-                                        onPressed: () {
-                                          setState(() {
-                                            saveData(index);
 
-                                            Navigator.pushReplacement(
-                                              context,
-                                              // DetailPage adalah halaman yang dituju
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProductList()),
-                                            );
-                                          });
-                                        },
-                                        child: const Text(
-                                          'PILIH',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              letterSpacing: 1),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
@@ -318,127 +335,126 @@ class _ProductListState extends State<ProductList> {
                                   .toLowerCase()
                                   .contains(filter.toLowerCase())
                               ? Card(
-                                  color: Colors.white,
-                                  elevation: 0.0,
-                                  margin: EdgeInsets.only(
-                                      bottom: products.length - 1 == index
-                                          ? 100
-                                          : 10),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: Container(
-                                      height: 120,
-                                      width: 150,
-                                      child: Row(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        color: Colors.white,
+                        elevation: 0.0,
+                        margin: EdgeInsets.fromLTRB(0,10,0,products.length - 1 == index ? 100 : 10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            height: 120,
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    bottomLeft: Radius.circular(10.0),
+                                  ),
+                                  child: Image(
+                                    height: 120,
+                                    width: 150,
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        products[index].image.toString()),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        text: TextSpan(
+                                            text: '',
+                                            style: TextStyle(
+                                                color: Colors
+                                                    .blueGrey.shade800,
+                                                fontSize: 16.0),
+                                            children: [
+                                              TextSpan(
+                                                  text:
+                                                  '${products[index].name.toString()}\n',
+                                                  style: header2),
+                                            ]),
+                                      ),
+                                      RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        text: TextSpan(
+                                            text: '',
+                                            style: TextStyle(
+                                                color: Colors
+                                                    .blueGrey.shade800,
+                                                fontSize: 16.0),
+                                            children: [
+                                              TextSpan(
+                                                  text:
+                                                  '${products[index].service.toString()}\n',
+                                                  style: TextStyle(
+                                                      color:
+                                                      Colors.black45,
+                                                      fontFamily:
+                                                      'Poppins',
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w600)),
+                                            ]),
+                                      ),
+                                      RichText(
+                                        maxLines: 1,
+                                        text: TextSpan(
+                                          text: 'Rp. ',
+                                          style: TextStyle(
+                                              color: Colors
+                                                  .blueGrey.shade800,
+                                              fontSize: 16.0,
+                                              fontFamily: 'Poppins',
+                                              fontWeight:
+                                              FontWeight.w600),
+                                          children: [
+                                            TextSpan(
+                                              text: NumberFormat.currency(
+                                                locale: 'id',
+                                                symbol: '',
+                                                decimalDigits: 0,
+                                              ).format(
+                                                  products[index].price),
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16.0,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight:
+                                                  FontWeight.w600),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Row(
                                         children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5.0),
-                                              bottomLeft: Radius.circular(5.0),
-                                            ),
-                                            child: Image(
-                                              height: 120,
-                                              width: 120,
-                                              fit: BoxFit.cover,
-                                              image: AssetImage(products[index]
-                                                  .image
-                                                  .toString()),
-                                            ),
+                                          SizedBox(
+                                            width: 105,
                                           ),
                                           SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const SizedBox(
-                                                  height: 5.0,
-                                                ),
-                                                RichText(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  text: TextSpan(
-                                                      text: '',
-                                                      style: TextStyle(
-                                                          color: Colors.blueGrey
-                                                              .shade800,
-                                                          fontSize: 16.0),
-                                                      children: [
-                                                        TextSpan(
-                                                            text:
-                                                                '${products[index].name.toString()}\n',
-                                                            style: header2),
-                                                      ]),
-                                                ),
-                                                RichText(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  text: TextSpan(
-                                                      text: '',
-                                                      style: TextStyle(
-                                                          color: Colors.blueGrey
-                                                              .shade800,
-                                                          fontSize: 16.0),
-                                                      children: [
-                                                        TextSpan(
-                                                            text:
-                                                                '${products[index].service.toString()}\n',
-                                                            style: const TextStyle(
-                                                                color: Colors
-                                                                    .black45,
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                      ]),
-                                                ),
-                                                RichText(
-                                                  maxLines: 1,
-                                                  text: TextSpan(
-                                                    text: 'Rp. ',
-                                                    style: TextStyle(
-                                                        color: Colors
-                                                            .blueGrey.shade800,
-                                                        fontSize: 16.0,
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: NumberFormat
-                                                            .currency(
-                                                          locale: 'id',
-                                                          symbol: '',
-                                                          decimalDigits: 0,
-                                                        ).format(products[index]
-                                                            .price),
-                                                        style: TextStyle(
-                                                            color: Colors
-                                                                .blueGrey
-                                                                .shade800,
-                                                            fontSize: 16.0,
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          ElevatedButton(
+                                            height: 30,
+                                            width: 75,
+                                            child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor: yellowColor,
-                                                  fixedSize: Size(60, 25)),
+                                                  fixedSize: Size(70, 25)),
                                               onPressed: () {
                                                 setState(() {
                                                   saveData(index);
@@ -456,15 +472,25 @@ class _ProductListState extends State<ProductList> {
                                                 'PILIH',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
+                                                    fontSize: 13,
                                                     fontFamily: 'Poppins',
                                                     letterSpacing: 1),
-                                              )),
+                                              ),
+                                            ),
+                                          ),
                                         ],
+
                                       ),
-                                    ),
+
+                                    ],
                                   ),
-                                )
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                               : new Container();
                     }),
               ),
@@ -510,6 +536,9 @@ class _ProductListState extends State<ProductList> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(
+                              height: 6,
+                            ),
                             Consumer<CartProvider>(
                               builder: (context, value, child) {
                                 return Text(

@@ -6,6 +6,9 @@ import 'package:serpismotor/database/db_helper.dart';
 import 'package:serpismotor/cart/cart_model.dart';
 import 'package:serpismotor/provider/cartprovider.dart';
 import 'package:serpismotor/utils/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:serpismotor/utils/fonts.dart';
+
 
 class CartScreen extends StatefulWidget {
   const CartScreen({
@@ -35,9 +38,11 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         backgroundColor: backgroundColor,
         leading: GestureDetector(
-          child: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.black,
+          child: Container(
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            ),
           ),
           onTap: () {
             Navigator.pop(context);
@@ -52,104 +57,176 @@ class _CartScreenState extends State<CartScreen> {
                 if (provider.cart.isEmpty) {
                   return const Center(
                       child: Text(
-                    'Masih Kosong',
+                    'Kosong',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ));
                 } else {
                   return ListView.builder(
+                      physics: BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics()),
+                      padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
                       shrinkWrap: true,
                       itemCount: provider.cart.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          color: Colors.blueGrey.shade200,
-                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          color: Colors.white,
+                          elevation: 0.0,
+                          margin: EdgeInsets.fromLTRB(0,10,0,provider.cart.length - 1 == index ? 100 : 10),
                           child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Image(
-                                  height: 80,
-                                  width: 80,
-                                  image:
+                            padding: const EdgeInsets.all(0),
+                            child: Container(
+                              height: 120,
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10.0),
+                                      bottomLeft: Radius.circular(10.0),
+                                    ),
+                                    child: Image(
+                                      height: 120,
+                                      width: 150,
+                                        fit: BoxFit.cover,
+                                      image:
                                       AssetImage(provider.cart[index].image!),
-                                ),
-                                SizedBox(
-                                  width: 130,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 5.0,
-                                      ),
-                                      RichText(
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        text: TextSpan(
-                                            text: 'Name: ',
-                                            style: TextStyle(
-                                                color: Colors.blueGrey.shade800,
-                                                fontSize: 16.0),
-                                            children: [
-                                              TextSpan(
-                                                  text:
-                                                      '${provider.cart[index].productName!}\n',
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ]),
-                                      ),
-                                      RichText(
-                                        maxLines: 1,
-                                        text: TextSpan(
-                                            text: 'Unit: ',
-                                            style: TextStyle(
-                                                color: Colors.blueGrey.shade800,
-                                                fontSize: 16.0),
-                                            children: [
-                                              TextSpan(
-                                                  text:
-                                                      '${provider.cart[index].service!}\n',
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ]),
-                                      ),
-                                      RichText(
-                                        maxLines: 1,
-                                        text: TextSpan(
-                                            text: 'Price: ' r"$",
-                                            style: TextStyle(
-                                                color: Colors.blueGrey.shade800,
-                                                fontSize: 16.0),
-                                            children: [
-                                              TextSpan(
-                                                  text:
-                                                      '${provider.cart[index].productPrice!}\n',
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ]),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                                IconButton(
-                                    onPressed: () {
-                                      dbHelper!.deleteCartItem(
-                                          provider.cart[index].id!);
-                                      provider
-                                          .removeItem(provider.cart[index].id!);
-                                      provider.removeCounter();
-                                    },
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.red.shade800,
-                                    )),
-                              ],
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        RichText(
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          text: TextSpan(
+                                              text: '',
+                                              style: TextStyle(
+                                                  color: Colors.blueGrey.shade800,
+                                                  fontSize: 16.0),
+                                              children: [
+                                                TextSpan(
+                                                    text:
+                                                    '${provider.cart[index].productName!}\n',
+                                                    style: header2),
+                                              ]),
+                                        ),
+                                        RichText(
+                                          maxLines: 1,
+                                          text: TextSpan(
+                                              text: '',
+                                              style: TextStyle(
+                                                  color: Colors.blueGrey.shade800,
+                                                  fontSize: 16.0),
+                                              children: [
+                                                TextSpan(
+                                                    text:
+                                                    '${provider.cart[index].service!}\n',
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black45,
+                                                        fontFamily:
+                                                        'Poppins',
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                        FontWeight
+                                                            .w600)),
+                                              ]),
+                                        ),
+                                        RichText(
+                                          maxLines: 1,
+                                          text: TextSpan(
+                                              text: 'Rp. ',
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .blueGrey.shade800,
+                                                  fontSize: 16.0,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight:
+                                                  FontWeight.w600),
+                                              children: [
+                                                TextSpan(
+                                                  text: NumberFormat.currency(
+                                                    locale: 'id',
+                                                    symbol: '',
+                                                    decimalDigits: 0,
+                                                  ).format(
+                                                      provider.cart[index].productPrice!),
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16.0,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                      FontWeight.w600),
+                                                ),
+
+                                              ]),
+                                        ),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 105,
+                                            ),
+                                            SizedBox(
+                                              height: 30,
+                                              width: 75,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    backgroundColor: yellowColor,
+                                                    fixedSize: Size(90, 25)),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    dbHelper!.deleteCartItem(
+                                                        provider.cart[index].id!);
+                                                    provider
+                                                        .removeItem(provider.cart[index].id!);
+                                                    provider.removeCounter();
+                                                  });
+                                                },
+                                                child: const Text(
+                                                  'HAPUS',
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 10,
+                                                      fontFamily: 'Poppins',
+                                                      letterSpacing: 1),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  // IconButton(
+                                  //     onPressed: () {
+                                  //       dbHelper!.deleteCartItem(
+                                  //           provider.cart[index].id!);
+                                  //       provider
+                                  //           .removeItem(provider.cart[index].id!);
+                                  //       provider.removeCounter();
+                                  //     },
+                                  //     icon: Icon(
+                                  //       Icons.delete,
+                                  //       color: Colors.red.shade800,
+                                  //     )),
+                                ],
+                              ),
+
                             ),
                           ),
                         );
@@ -167,15 +244,19 @@ class _CartScreenState extends State<CartScreen> {
                         (totalPrice.value ?? 0);
               }
               return Container(
-                height: 50,
+                height: 85,
                 color: Colors.amber,
-                child: ValueListenableBuilder<int?>(
-                    valueListenable: totalPrice,
-                    builder: (context, val, child) {
-                      return ReusableWidget(
-                          title: 'Estimasi Biaya Service ',
-                          value: r'Rp. ' + (val?.toStringAsFixed(2) ?? '0'));
-                    }),
+                child: Column(
+                  children: [
+                    ValueListenableBuilder<int?>(
+                        valueListenable: totalPrice,
+                        builder: (context, val, child) {
+                          return ReusableWidget(
+                              title: 'Total Biaya Service',
+                              value: r'Rp.' + (val?.toStringAsFixed(0) ?? '0'));
+                        }),
+                  ],
+                )
               );
             },
           )
