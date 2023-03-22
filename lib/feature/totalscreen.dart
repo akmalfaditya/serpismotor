@@ -9,7 +9,6 @@ import 'package:serpismotor/utils/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:serpismotor/utils/fonts.dart';
 
-
 class CartScreen extends StatefulWidget {
   const CartScreen({
     Key? key,
@@ -34,14 +33,48 @@ class _CartScreenState extends State<CartScreen> {
     final cart = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
         elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: Column(
+            children: [
+              Text(
+                'Total Estimasi',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                'Biaya Servis',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
         centerTitle: true,
         backgroundColor: backgroundColor,
         leading: GestureDetector(
-          child: Container(
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20),
+            child: Container(
+              decoration: BoxDecoration(
+                color: yellowColor,
+                shape: BoxShape.circle,
+              ),
+              width: 40,
+              height: 40,
+              child: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Colors.black,
+                size: 15,
+              ),
             ),
           ),
           onTap: () {
@@ -71,11 +104,11 @@ class _CartScreenState extends State<CartScreen> {
                       itemBuilder: (context, index) {
                         return Card(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                          ),
+                              borderRadius: BorderRadius.circular(10)),
                           color: Colors.white,
                           elevation: 0.0,
-                          margin: EdgeInsets.fromLTRB(0,10,0,provider.cart.length - 1 == index ? 100 : 10),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0,
+                              provider.cart.length - 1 == index ? 100 : 10),
                           child: Padding(
                             padding: const EdgeInsets.all(0),
                             child: Container(
@@ -90,19 +123,18 @@ class _CartScreenState extends State<CartScreen> {
                                     child: Image(
                                       height: 120,
                                       width: 150,
-                                        fit: BoxFit.cover,
-                                      image:
-                                      AssetImage(provider.cart[index].image!),
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          provider.cart[index].image!),
                                     ),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Expanded(
-
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         const SizedBox(
                                           height: 5.0,
@@ -113,12 +145,13 @@ class _CartScreenState extends State<CartScreen> {
                                           text: TextSpan(
                                               text: '',
                                               style: TextStyle(
-                                                  color: Colors.blueGrey.shade800,
+                                                  color:
+                                                      Colors.blueGrey.shade800,
                                                   fontSize: 16.0),
                                               children: [
                                                 TextSpan(
                                                     text:
-                                                    '${provider.cart[index].productName!}\n',
+                                                        '${provider.cart[index].productName!}\n',
                                                     style: header2),
                                               ]),
                                         ),
@@ -127,21 +160,19 @@ class _CartScreenState extends State<CartScreen> {
                                           text: TextSpan(
                                               text: '',
                                               style: TextStyle(
-                                                  color: Colors.blueGrey.shade800,
+                                                  color:
+                                                      Colors.blueGrey.shade800,
                                                   fontSize: 16.0),
                                               children: [
                                                 TextSpan(
                                                     text:
-                                                    '${provider.cart[index].service!}\n',
+                                                        '${provider.cart[index].service!}\n',
                                                     style: TextStyle(
-                                                        color:
-                                                        Colors.black45,
-                                                        fontFamily:
-                                                        'Poppins',
+                                                        color: Colors.black45,
+                                                        fontFamily: 'Poppins',
                                                         fontSize: 12,
                                                         fontWeight:
-                                                        FontWeight
-                                                            .w600)),
+                                                            FontWeight.w600)),
                                               ]),
                                         ),
                                         RichText(
@@ -149,28 +180,26 @@ class _CartScreenState extends State<CartScreen> {
                                           text: TextSpan(
                                               text: 'Rp. ',
                                               style: TextStyle(
-                                                  color: Colors
-                                                      .blueGrey.shade800,
+                                                  color:
+                                                      Colors.blueGrey.shade800,
                                                   fontSize: 16.0,
                                                   fontFamily: 'Poppins',
-                                                  fontWeight:
-                                                  FontWeight.w600),
+                                                  fontWeight: FontWeight.w600),
                                               children: [
                                                 TextSpan(
                                                   text: NumberFormat.currency(
                                                     locale: 'id',
                                                     symbol: '',
                                                     decimalDigits: 0,
-                                                  ).format(
-                                                      provider.cart[index].productPrice!),
+                                                  ).format(provider.cart[index]
+                                                      .productPrice!),
                                                   style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 16.0,
                                                       fontFamily: 'Poppins',
                                                       fontWeight:
-                                                      FontWeight.w600),
+                                                          FontWeight.w600),
                                                 ),
-
                                               ]),
                                         ),
                                         SizedBox(
@@ -186,21 +215,24 @@ class _CartScreenState extends State<CartScreen> {
                                               width: 75,
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                    backgroundColor: yellowColor,
+                                                    backgroundColor:
+                                                        yellowColor,
                                                     fixedSize: Size(90, 25)),
                                                 onPressed: () {
                                                   setState(() {
                                                     dbHelper!.deleteCartItem(
-                                                        provider.cart[index].id!);
-                                                    provider
-                                                        .removeItem(provider.cart[index].id!);
+                                                        provider
+                                                            .cart[index].id!);
+                                                    provider.removeItem(provider
+                                                        .cart[index].id!);
                                                     provider.removeCounter();
                                                   });
                                                 },
                                                 child: const Text(
                                                   'HAPUS',
                                                   style: TextStyle(
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontSize: 10,
                                                       fontFamily: 'Poppins',
                                                       letterSpacing: 1),
@@ -226,7 +258,6 @@ class _CartScreenState extends State<CartScreen> {
                                   //     )),
                                 ],
                               ),
-
                             ),
                           ),
                         );
@@ -244,20 +275,80 @@ class _CartScreenState extends State<CartScreen> {
                         (totalPrice.value ?? 0);
               }
               return Container(
-                height: 85,
-                color: Colors.amber,
-                child: Column(
-                  children: [
-                    ValueListenableBuilder<int?>(
-                        valueListenable: totalPrice,
-                        builder: (context, val, child) {
-                          return ReusableWidget(
-                              title: 'Total Biaya Service',
-                              value: r'Rp.' + (val?.toStringAsFixed(0) ?? '0'));
-                        }),
-                  ],
-                )
-              );
+                  height: 85,
+                  decoration: BoxDecoration(
+                      gradient: gradientColor,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0))),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                Consumer<CartProvider>(
+                                  builder: (context, value, child) {
+                                    return Text(
+                                      "${value.cart.length} Services",
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  "Total Estimasi Biaya Servis",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Consumer<CartProvider>(
+                                  builder: (BuildContext context, value,
+                                      Widget? child) {
+                                    final NumberFormat currencyFormat =
+                                        NumberFormat.currency(
+                                            locale: 'id_ID', symbol: 'Rp. ');
+                                    int totalPrice = 0;
+                                    for (var element in value.cart) {
+                                      totalPrice += (element.productPrice! *
+                                          element.quantity!.value);
+                                    }
+                                    return Text(
+                                      currencyFormat.format(totalPrice),
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ));
             },
           )
         ],
