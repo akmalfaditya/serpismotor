@@ -334,8 +334,11 @@ class _ProductListState extends State<ProductList> {
                               ),
                             )
                           : '${products[index].name}'
-                                  .toLowerCase()
-                                  .contains(filter.toLowerCase())
+                                      .toLowerCase()
+                                      .contains(filter.toLowerCase()) ||
+                                  '${products[index].service}'
+                                      .toLowerCase()
+                                      .contains(filter.toLowerCase())
                               ? Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
