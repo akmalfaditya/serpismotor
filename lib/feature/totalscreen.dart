@@ -8,6 +8,8 @@ import 'package:serpismotor/provider/cartprovider.dart';
 import 'package:serpismotor/utils/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:serpismotor/utils/fonts.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 class CartScreen extends StatefulWidget {
   const CartScreen({
@@ -228,7 +230,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       provider.removeCounter();
                                                     });
                                                   },
-                                                  child: const Text(
+                                                  child: const AutoSizeText(
                                                     'HAPUS',
                                                     style: TextStyle(
                                                         fontWeight:
@@ -236,6 +238,8 @@ class _CartScreenState extends State<CartScreen> {
                                                         fontSize: 12,
                                                         fontFamily: 'Poppins',
                                                         letterSpacing: 1),
+                                                    minFontSize: 5,
+                                                    maxLines: 1,
                                                   ),
                                                 ),
                                               ),

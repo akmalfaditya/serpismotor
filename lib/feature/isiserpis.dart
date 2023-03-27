@@ -12,6 +12,7 @@ import 'package:serpismotor/views/home_view.dart';
 import 'package:serpismotor/utils/colors.dart';
 import 'package:serpismotor/utils/sizes.dart';
 import 'package:serpismotor/utils/fonts.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -308,7 +309,7 @@ class _ProductListState extends State<ProductList> {
                                                         );
                                                       });
                                                     },
-                                                    child: const Text(
+                                                    child: const AutoSizeText(
                                                       'PILIH',
                                                       style: TextStyle(
                                                           fontWeight:
@@ -316,6 +317,8 @@ class _ProductListState extends State<ProductList> {
                                                           fontSize: 13,
                                                           fontFamily: 'Poppins',
                                                           letterSpacing: 1),
+                                                      minFontSize: 5,
+                                                      maxLines: 1,
                                                     ),
                                                   ),
                                                 ),
