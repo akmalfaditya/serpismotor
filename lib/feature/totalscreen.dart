@@ -135,10 +135,10 @@ class _CartScreenState extends State<CartScreen> {
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        const SizedBox(
-                                          height: 5.0,
-                                        ),
+
                                         RichText(
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
@@ -202,43 +202,47 @@ class _CartScreenState extends State<CartScreen> {
                                                 ),
                                               ]),
                                         ),
-                                        SizedBox(
-                                          height: 10.0,
-                                        ),
+
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            SizedBox(
-                                              width: 105,
+                                            Expanded(
+                                                flex:11,
+                                                child: Container()
                                             ),
-                                            SizedBox(
-                                              height: 30,
-                                              width: 75,
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        yellowColor,
-                                                    fixedSize: Size(90, 25)),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    dbHelper!.deleteCartItem(
-                                                        provider
-                                                            .cart[index].id!);
-                                                    provider.removeItem(provider
-                                                        .cart[index].id!);
-                                                    provider.removeCounter();
-                                                  });
-                                                },
-                                                child: const Text(
-                                                  'HAPUS',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 10,
-                                                      fontFamily: 'Poppins',
-                                                      letterSpacing: 1),
+
+                                              Expanded(
+                                                flex:9,
+                                                child: ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          yellowColor,
+                                                      fixedSize: Size(70, 25)),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      dbHelper!.deleteCartItem(
+                                                          provider
+                                                              .cart[index].id!);
+                                                      provider.removeItem(provider
+                                                          .cart[index].id!);
+                                                      provider.removeCounter();
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                    'HAPUS',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 12,
+                                                        fontFamily: 'Poppins',
+                                                        letterSpacing: 1),
+                                                  ),
                                                 ),
                                               ),
-                                            )
+                                            Expanded(
+                                                flex:1,
+                                                child: Container()
+                                            ),
                                           ],
                                         )
                                       ],
