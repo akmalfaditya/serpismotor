@@ -85,6 +85,11 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  void addItem(){
+    _setPrefsItems();
+    notifyListeners();
+  }
+
   int getQuantity(int quantity){
     _getPrefsItems();
     return _quantity;

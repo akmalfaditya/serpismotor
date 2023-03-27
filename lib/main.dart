@@ -69,9 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: FlutterLogo(
-        size: MediaQuery.of(context).size.height,
-      ),
+      child: Image(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+
+          image: AssetImage('assets/images/servismoputih.png')
+      )
+
     );
   }
 }

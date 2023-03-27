@@ -36,7 +36,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                     Spacer(),
                     Container(
                       child: Text(
-                        'Halo Akmal',
+                        'Halo,',
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall
@@ -66,11 +66,9 @@ class HeaderWithSearchBox extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundImage:
-                          AssetImage("assets/images/tunjungan.jpg"),
-                    ),
+                    child: Icon(
+                        Icons.person, color: Colors.black, size: 30,
+                    )
                   ),
                 ),
               ],

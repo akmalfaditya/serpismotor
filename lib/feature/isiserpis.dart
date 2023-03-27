@@ -49,82 +49,82 @@ class _ProductListState extends State<ProductList> {
         name: 'Ganti Oli Mesin',
         service: 'Oli',
         price: 40000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantiolimesin.jpeg'),
     Item(
         name: 'Tune Up',
         service: 'Maintenance',
         price: 60000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/tuneup.jpeg'),
     Item(
         name: 'Starter Mati',
         service: 'Ganti Dinamo Starter',
         price: 40000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/startermati.jpeg'),
     Item(
         name: 'Starter Mati',
         service: 'Ganti ACCU',
         price: 200000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantiaki.jpeg'),
     Item(
         name: 'Rem Tidak Berfungsi',
         service: 'Cek Kabel Rem',
         price: 60000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/cekkabelrem.jpeg'),
     Item(
         name: 'Rem Tidak Berfungsi',
         service: 'Ganti Kampas Rem',
         price: 50000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantikampasrem.jpeg'),
     Item(
         name: 'Lampu Mati',
         service: 'Ganti Bohlam',
         price: 60000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantibohlam.jpeg'),
     Item(
         name: 'Lampu Mati',
         service: 'Ganti Soket',
         price: 50000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantisoket.jpeg'),
     Item(
         name: 'Lampu Mati',
         service: 'Cek Kelistrikan',
         price: 30000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/cekkelistrikan.jpeg'),
     Item(
         name: 'Ganti Busi',
         service: 'Busi',
         price: 15000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantibusi.jpeg'),
     Item(
-        name: 'Ganti Filler Udara',
-        service: 'Filler Udara',
+        name: 'Ganti Filter Udara',
+        service: 'Filter Udara',
         price: 55000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantifilter.jpeg'),
     Item(
         name: 'Ganti Kampas Rem',
         service: 'Kampas Rem',
         price: 50000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantikampas.jpeg'),
     Item(
         name: 'Ganti Rantai dan Gear',
         service: 'Rantai & Gear',
         price: 120000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantirantai.jpeg'),
     Item(
         name: 'Ganti Ban',
         service: 'Ban',
         price: 150000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantiban.jpeg'),
     Item(
         name: 'Ganti Aki',
         service: 'Aki',
         price: 200000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/gantiaki.jpeg'),
     Item(
         name: 'Service Karburator',
         service: 'Karburator',
         price: 85000,
-        image: 'assets/images/tunjungan.jpg'),
+        image: 'assets/images/karburator.jpeg'),
   ];
 
   //List<bool> clicked = List.generate(10, (index) => false, growable: true);
@@ -169,7 +169,7 @@ class _ProductListState extends State<ProductList> {
                 child: ListView.builder(
                     physics: BouncingScrollPhysics(
                         parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
                     shrinkWrap: true,
                     itemCount: products.length,
                     itemBuilder: (context, index) {
@@ -545,14 +545,16 @@ class _ProductListState extends State<ProductList> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(
+                              height: 6,
+                            ),
                             Consumer<CartProvider>(
                               builder: (context, value, child) {
                                 return Text(
@@ -623,6 +625,7 @@ class _ProductListState extends State<ProductList> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
+                      flex: 7,
                       child: TextField(
                         onChanged: (value) {},
                         controller: searchController,
@@ -636,21 +639,15 @@ class _ProductListState extends State<ProductList> {
                         ),
                       ),
                     ),
-                    Positioned(
-                        right: 1,
-                        child: ClipOval(
-                          child: Material(
-                            color: yellowColor,
-                            child: InkWell(
-                              child: const Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Icon(
-                                  Icons.search,
-                                  size: 24,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
+                    Expanded(
+                        flex: 1,
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: yellowColor,
+                          child: Icon(
+                            Icons.search,
+                            size: 24,
+                            color: Colors.black,
                           ),
                         ))
                   ],

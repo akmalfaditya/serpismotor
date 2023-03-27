@@ -66,6 +66,22 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/tunjungan.jpg
+    - assets/images/gantiolimesin.jpeg
+    - assets/images/tuneup.jpeg
+    - assets/images/startermati.jpeg
+    - assets/images/gantiaki.jpeg
+    - assets/images/cekkabelrem.jpeg
+    - assets/images/gantikampasrem.jpeg
+    - assets/images/gantibohlam.jpeg
+    - assets/images/gantisoket.jpeg
+    - assets/images/cekkelistrikan.jpeg
+    - assets/images/gantibusi.jpeg
+    - assets/images/gantifilter.jpeg
+    - assets/images/gantikampas.jpeg
+    - assets/images/gantirantai.jpeg
+    - assets/images/gantiban.jpeg
+    - assets/images/karburator.jpeg
+    - assets/images/servismoputih.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

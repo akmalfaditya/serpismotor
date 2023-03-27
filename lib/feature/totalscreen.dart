@@ -90,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
                 if (provider.cart.isEmpty) {
                   return const Center(
                       child: Text(
-                    'Kosong',
+                    'Anda Belum Menambah Item',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ));
@@ -292,9 +292,6 @@ class _CartScreenState extends State<CartScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 6,
-                                ),
                                 Consumer<CartProvider>(
                                   builder: (context, value, child) {
                                     return Text(
@@ -307,7 +304,7 @@ class _CartScreenState extends State<CartScreen> {
                                     );
                                   },
                                 ),
-                                SizedBox(height: 2),
+
                                 Text(
                                   "Total Estimasi Biaya Servis",
                                   style: TextStyle(
@@ -335,7 +332,7 @@ class _CartScreenState extends State<CartScreen> {
                                     return Text(
                                       currencyFormat.format(totalPrice),
                                       style: const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                       ),
