@@ -302,24 +302,28 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 Consumer<CartProvider>(
                                   builder: (context, value, child) {
-                                    return Text(
+                                    return AutoSizeText(
                                       "${value.cart.length} Services",
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
+                                      minFontSize: 10,
+                                      maxLines: 1,
                                     );
                                   },
                                 ),
 
-                                Text(
+                                AutoSizeText(
                                   "Total Estimasi Biaya Servis",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black,
                                     fontSize: 14,
                                   ),
+                                  minFontSize: 10,
+                                  maxLines: 1,
                                 ),
                               ],
                             ),
@@ -337,13 +341,15 @@ class _CartScreenState extends State<CartScreen> {
                                       totalPrice += (element.productPrice! *
                                           element.quantity!.value);
                                     }
-                                    return Text(
+                                    return AutoSizeText(
                                       currencyFormat.format(totalPrice),
                                       style: const TextStyle(
                                         fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                      minFontSize: 10,
+                                      maxLines: 1,
                                     );
                                   },
                                 ),
