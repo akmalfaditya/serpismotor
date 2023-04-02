@@ -150,9 +150,9 @@ class _ProductListState extends State<ProductList> {
           .then((value) {
         cart.addTotalPrice(products[index].price.toDouble());
         cart.addCounter();
-        print('Product Added to cart');
+        cart.getData();
       }).onError((error, stackTrace) {
-        print(error.toString());
+
       });
     }
 
@@ -261,12 +261,12 @@ class _ProductListState extends State<ProductList> {
                                 setState(() {
                                   saveData(index);
 
-                                  Navigator.pushReplacement(
-                                    context,
-                                    // DetailPage adalah halaman yang dituju
-                                    MaterialPageRoute(
-                                        builder: (context) => ProductList()),
-                                  );
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   // DetailPage adalah halaman yang dituju
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => ProductList()),
+                                  // );
                                 });
                               },
                               child: const AutoSizeText(
